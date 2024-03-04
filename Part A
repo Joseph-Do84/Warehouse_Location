@@ -1,0 +1,35 @@
+Part A:
+CODING PART: 
+//Input parameter 
+int n=...;//number of cities  
+int p=...; //number of warehouses opened 
+range cities = 1..n; 
+int d[cities][cities]=...; //distance matrix 
+float demand[cities]=...; //demand at each city 
+//decision variables 
+dvar boolean x[cities][cities];//1 if city j is supplied by a warehouse  , 0 
+otherwise 
+dvar boolean y[cities]; //1 if a warehouse is built in city i, 0 otherwise 
+//objective 
+minimize sum(i,j in cities) x[i][j] * d[i][j] * demand[i]; 
+//constraint 
+subject to{ 
+forall(j in cities) 
+sum(i in cities) x[i][j] == 1; 
+sum(i in cities) y[i] == p; 
+forall(i,j in cities) 
+x[i][j] <= y[i];  
+} 
+DATA PART: 
+n=9; 
+p= 4; 
+d = [[0, 720, 790, 297, 283, 296, 461, 769, 996], 
+[720, 0, 884, 555, 722, 461, 685, 245, 1099], 
+[790, 884, 0, 976, 614, 667, 371, 645, 219], 
+[297, 555, 976, 0, 531, 359, 602, 715, 1217], 
+[283, 722, 614, 531, 0, 263, 286, 629, 721], 
+[296, 461, 667, 359, 263, 0, 288, 479, 907], 
+[461, 685, 371, 602, 286, 288, 0, 448, 589], 
+[769, 245, 645, 715, 629, 479, 448, 0, 867], 
+[996, 1099, 219, 1217, 721, 907, 589, 867, 0]]; 
+demand = [2870000, 572000, 8450000, 350000, 901000, 333000, 306000, 723000, 610000];
